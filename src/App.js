@@ -26,6 +26,16 @@ function App() {
         },
     ]);
 
+    function updateEmployee(id, newName, newRole) {
+        const updatedEmployees = employees.map((employee) => {
+            console.log(id, newName, newRole);
+            if (id == employee.id) {
+                return { ...employee, name: newName, role: newRole };
+            }
+            return employee;
+        });
+        setEmployees(updatedEmployees);
+    }
     return (
         <div className="App">
             <p>Employee Application</p>
@@ -35,10 +45,12 @@ function App() {
                         {employees.map((employee) => {
                             return (
                                 <Employee
+                                    id={employee.id}
                                     key={employee.id}
                                     name={employee.name}
                                     role={employee.role}
                                     img={employee.img}
+                                    updateEmployee={updateEmployee}
                                 />
                             );
                         })}
